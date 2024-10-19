@@ -1,0 +1,1628 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  outline: none;
+  border: none;
+  text-transform: capitalize;
+  transition: all 0.2s linear;
+}
+html {
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-size: 1.2rem;
+  font-family: var(--primary-font);
+
+}
+
+html::-webkit-scrollbar {
+  width: 0.5rem;
+}
+html::-webkit-scrollbar-track {
+  background: rgb(235, 202, 245);
+}
+html::-webkit-scrollbar-thumb {
+  background: #ff0873;
+  border-radius: 25%;
+}
+*::selection {
+  background: #ffffff;
+  color: #ff0873;
+}
+
+
+
+/* loader start ------------------------------------------------------------------------------------------------------ */
+#wedding-loader {
+  background: #f9f1d4;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  font-family: 'Lovers Quarrel', cursive;
+  text-align: center;
+}
+
+/* Text Message and Date with Flexbox for center alignment */
+.message, .date {
+  color: #c84648;
+  text-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+  margin: 0;
+  opacity: 0; /* Initially hidden for animation */
+}
+
+.message {
+  font-size: 5.5em;
+  margin-bottom: 1rem;
+  transform: scale(0.8); /* Smaller initially */
+  animation: fadeInScale 2s ease-out forwards; /* Fade and scale up */
+  animation-delay: 0.5s; /* Delay to sync with other animations */
+}
+
+.date {
+  font-size: 4.5em;
+  transform: translateY(100px); /* Start from below */
+  animation: fadeInUp 2s ease-out forwards;
+  animation-delay: 1s; /* Delay for staggered effect */
+}
+
+/* Petals Container using Grid */
+#petals-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(1rem, 1fr)); /* Grid layout */
+  grid-gap: 2rem;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* Prevent interaction */
+}
+
+/* Petal Styling */
+.petal {
+  width: 1.5rem;
+  height: 1.5rem;
+  position: absolute;
+  top: -10rem;
+  animation: fall 7s infinite ease-in-out;
+  display: flex; /* Flexbox to center petals */
+  align-items: center;
+  justify-content: center;
+}
+
+.petal .rotate {
+  animation: driftyRotate 3s infinite both ease-in-out;
+}
+
+.petal .askew {
+  background-color: currentColor;
+  transform: skewY(10deg);
+  width: 1.5rem;
+  height: 1.5rem;
+  animation: drifty 3s infinite alternate both ease-in-out;
+}
+
+.petal {
+  color: rgba(255, 182, 193, 0.8); /* Light pink */
+}
+
+/* Petal Animations */
+@keyframes fall {
+  0% {
+    transform: translateY(-10%) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes driftyRotate {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes drifty {
+  0% {
+    transform: skewY(10deg) translateX(-100%);
+  }
+  100% {
+    transform: skewY(-12deg) translateX(100%);
+  }
+}
+
+/* Fade-in and Scale-Up Animation for Message */
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.8); /* Start smaller */
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1); /* Scale up to normal */
+  }
+}
+
+/* Fade-In and Slide-Up Animation for Couple's Names */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(100px); /* Start from below */
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0); /* Move up into view */
+  }
+}
+
+/* Smooth transition to fade out the loader */
+.fade-out {
+  opacity: 0;
+  transition: opacity 1s ease-out;
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+  .message {
+    font-size: 2.5em; /* Smaller font on tablets */
+  }
+
+  .date {
+    font-size: 2em;
+  }
+
+  .petal {
+    width: 1rem; /* Smaller petals on smaller devices */
+    height: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .message {
+    font-size: 4.5em; /* Adjust for mobile */
+  }
+
+  .date {
+    font-size: 3.5em;
+  }
+}
+/* loader end------------------------------------------------------------------------------------------------------ */
+
+
+
+/* Declare Variable */
+:root {
+  --pink: #ff0873;
+  --bg: #0a0a0a;
+  --shadow: 0 2px 2px rgb(0 0 0 / 0.5);
+  --primary-font: "Work Sans", sans-serif;
+  --secondary-font: "Sacramento", cursive;
+}
+#notification {
+  position: fixed;
+  top: 20px;
+  right: -300px; /* Start off-screen */
+  padding: 15px;
+  background-color: #ff0873; /* Soft pink background */
+  color: white; /* White text */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transition: right 0.5s ease, opacity 0.5s ease; /* Smooth slide-in and fade */
+  z-index: 1000; /* Ensure it appears above other elements */
+  font-family: 'Arial', sans-serif; /* Add a playful font */
+  animation-fill-mode: forwards; /* Keep the last state of animation */
+}
+
+#notification.show {
+  right: 20px; /* Slide in */
+  opacity: 1; /* Fully opaque */
+  animation: bounceIn 0.5s forwards, heartBeat 1s infinite, fadeIn 0.5s forwards; /* Combine animations */
+}
+
+#notification.hide {
+  right: -300px; /* Slide out */
+  opacity: 0; /* Fade out */
+  animation: shakeOut 0.5s forwards, scaleOut 0.5s forwards, wiggleOut 0.5s forwards; /* Combine animations */
+}
+
+#dismissButton {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  margin-left: 10px;
+  transition: color 0.3s; /* Smooth color transition */
+}
+
+#dismissButton:hover {
+  color: #ffe156; /* Change color on hover */
+}
+
+/* Fade In Animation */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Bounce In Animation */
+@keyframes bounceIn {
+  0% {
+    transform: translateY(-30px);
+    opacity: 0;
+  }
+  60% {
+    transform: translateY(10px);
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Shake Out Animation */
+@keyframes shakeOut {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-10px);
+  }
+  50% {
+    transform: translateX(10px);
+  }
+  75% {
+    transform: translateX(-5px);
+  }
+  100% {
+    transform: translateX(300px);
+    opacity: 0;
+  }
+}
+
+/* Scale Out Animation */
+@keyframes scaleOut {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0.9);
+  }
+}
+
+/* Wiggle Out Animation */
+@keyframes wiggleOut {
+  0% {
+    transform: rotate(0);
+  }
+  50% {
+    transform: rotate(5deg);
+  }
+  100% {
+    transform: rotate(-5deg);
+  }
+}
+
+/* Heartbeat Animation */
+@keyframes heartBeat {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+/* Optional: Add a heart icon */
+#notification::before {
+  content: '❤️'; /* Heart emoji */
+  font-size: 20px;
+  margin-right: 10px; /* Space between heart and text */
+}
+
+
+/* main----------------------------------------------------------------------------------------------------------- */
+main {
+  opacity: 0;
+  animation: fadeIn 16s forwards;
+}
+main .btn {
+  background-color: #ff4081;
+  color: white;
+  border-radius: 50px;
+  box-shadow: 0 0 10px rgba(255, 64, 129, 0.5);
+  transition: box-shadow 0.5s;
+}
+
+main .btn:hover {
+  box-shadow: 0 0 20px rgba(255, 64, 129, 1);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* main end------------------------------------------------------------------------------------------------------- */
+
+
+/* simply-countdown start -----------------------------------------------------------------------------------------*/
+.simply-countdown{
+  color: #ffffff;
+}
+
+.simply-countdown {
+  animation: fadeIn 2s ease-in-out;
+  font-family: Arial, sans-serif;
+  color: #ffffff;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+/* Fade-in animation for countdown */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* simply-countdown end -------------------------------------------------------------------------------------------- */
+
+/* Hero--------------------------------------------------------------------------------------------------------------- */
+/* Background image with parallax effect */
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background-image: url("../img/winter-flowers.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  transition: filter 1s ease-in-out;
+  filter: brightness(0.7) blur(3px);
+}
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+/* Text shadow effect for text */
+.hero h1,
+.hero h4,
+.hero p {
+  text-shadow: var(--shadow);
+  opacity: 0;
+  animation: fadeInUp 1s forwards;
+}
+
+/* Animation to fade in text with a slight upward movement */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero h1 {
+  font-family: var(--secondary-font);
+  font-size: 6rem;
+  animation-delay: 0.5s;
+}
+
+.hero h4 {
+  font-size: 1.6rem;
+  animation-delay: 1s;
+}
+
+.hero p {
+  font-size: 1.4rem;
+  animation-delay: 1.5s;
+}
+
+/* Link button style */
+.hero a {
+  color: var(--pink);
+  background-color: white;
+  box-shadow: var(--shadow);
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+  transform: scale(1);
+}
+
+/* Link button hover effect */
+.hero a:hover {
+  background-color: var(--pink);
+  color: white;
+  transform: scale(1.1);
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Add hover effect to text */
+h1:hover, h4:hover, p:hover {
+  color: #ff0873;
+  transform: scale(1.1);
+  transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+/* Animation for background zoom effect on scroll */
+@keyframes bgZoom {
+  0% {
+    background-size: 100%;
+  }
+  100% {
+    background-size: 110%;
+  }
+}
+
+/* Apply background zoom effect on scroll */
+.hero::before {
+  animation: bgZoom 10s infinite alternate ease-in-out;
+}
+
+
+/* Hero end --------------------------------------------------------------------------------------------------- */
+
+/* leaf animations------------------------------------------------------------------------------------------- */
+#leaves {position:absolute;width:100%;text-align: right;}
+
+#leaves i {
+    display: inline-block;
+    width: 200px;
+    height: 150px;
+    background: linear-gradient(to bottom right, #e90505, #e00750);
+    transform: skew(20deg);
+    border-radius: 5% 40% 70%;
+    box-shadow: inset 0px 0px 1px #222;
+    border: 1px solid #333;
+    z-index: 1;
+    -webkit-animation: falling 5s 0s infinite;
+}
+
+#leaves i:nth-of-type(2n) { -webkit-animation: falling2 5s 0s infinite; }
+#leaves i:nth-of-type(3n) { -webkit-animation: falling3 5s 0s infinite; }
+
+#leaves i:before {
+  position: absolute;
+  display: none;
+  content: '';
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 25px; /* Half the width for the heart lobes */
+  height: 40px; /* Adjust height for the heart shape */
+  background: linear-gradient(to right, rgba(255,0,0,1), #FF0000); /* Heart color */
+  border-radius: 25px 25px 0 0; /* Rounded top */
+  transform: rotate(49deg);
+  border-radius: 0% 15% 15% 0%;
+  border-top: 1px solid #222;
+  border-bottom: 1px solid #222;
+  border-left: 0px solid #222;
+  border-right: 1px solid #222;
+  background: linear-gradient(to right, rgb(236, 7, 83), #005600);
+  z-index: 1;
+}
+
+#leaves i:after {
+  content: '';
+  height: 125px;
+  width: 10px;
+  background: linear-gradient(to right, rgba(0,0,0,.15), rgba(0,0,0,0));
+  display: block;
+  transform: rotate(125deg);
+  position: absolute;
+  left: 85px;
+  border-radius:50%;
+}
+
+
+#leaves i:nth-of-type(n)    { height:23px; width:30px; }
+#leaves i:nth-of-type(n):before { width:7px; height:5px; top:17px; right:1px; }
+#leaves i:nth-of-type(n):after { width:2px; height:17px; left: 12px; top:0px; }
+
+#leaves i:nth-of-type(2n+1)    { height:11px; width:16px; }
+#leaves i:nth-of-type(2n+1):before { width:4px; height:3px; top:7px; right:0px; }
+#leaves i:nth-of-type(2n+1):after { width:2px; height:6px; left: 5px; top:1px; }
+
+#leaves i:nth-of-type(3n+2)  { height:17px; width:23px; }
+#leaves i:nth-of-type(3n+2):before  { height:4px; width:4px; top:12px; right:1px; }
+#leaves i:nth-of-type(3n+2):after  { height:10px; width:2px; top:1px; left:8px; }
+
+#leaves i:nth-of-type(n)   { -webkit-animation-delay: 1.9s;}
+#leaves i:nth-of-type(2n)  { -webkit-animation-delay: 3.9s;}
+#leaves i:nth-of-type(3n)  { -webkit-animation-delay: 2.3s;}
+#leaves i:nth-of-type(4n)  { -webkit-animation-delay: 4.4s;}
+#leaves i:nth-of-type(5n)  { -webkit-animation-delay: 5s;  }
+#leaves i:nth-of-type(6n)  { -webkit-animation-delay: 3.5s;}
+#leaves i:nth-of-type(7n)  { -webkit-animation-delay: 2.8s;}
+#leaves i:nth-of-type(8n)  { -webkit-animation-delay: 1.5s;}
+#leaves i:nth-of-type(9n)  { -webkit-animation-delay: 3.3s;}
+#leaves i:nth-of-type(10n) { -webkit-animation-delay: 2.5s;}
+#leaves i:nth-of-type(11n) { -webkit-animation-delay: 1.2s;}
+#leaves i:nth-of-type(12n) { -webkit-animation-delay: 4.1s;}
+#leaves i:nth-of-type(13n) { -webkit-animation-delay: 1s;  }
+#leaves i:nth-of-type(14n) { -webkit-animation-delay: 4.7s;}
+#leaves i:nth-of-type(15n) { -webkit-animation-delay: 3s;  }
+
+#leaves i:nth-of-type(n)    { background: linear-gradient(to bottom right, #309900, #005600); }
+#leaves i:nth-of-type(2n+2)  { background: linear-gradient(to bottom right, #5e9900, #2b5600); }
+#leaves i:nth-of-type(4n+1)  { background: linear-gradient(to bottom right, #990, #564500); }
+
+#leaves i:nth-of-type(n)    { opacity: .7;}
+#leaves i:nth-of-type(3n+1)  { opacity: .5;}
+#leaves i:nth-of-type(3n+2)  { opacity: .3;}
+
+#leaves i:nth-of-type(n)    {transform: rotate(180deg);}
+
+
+#leaves i:nth-of-type(n) { -webkit-animation-timing-function:ease-in-out;}
+
+@-webkit-keyframes falling {
+    
+    0% {
+        -webkit-transform:
+            translate3d(300,0,0)
+            rotate(0deg);
+    }
+    
+    100% {
+        -webkit-transform:
+            translate3d(-350px,700px,0)
+            rotate(90deg);
+        opacity: 0;
+    }
+}
+
+@-webkit-keyframes falling3 {
+     0% {
+        -webkit-transform:
+            translate3d(0,0,0)
+            rotate(-20deg);
+    }
+    
+    100% {
+        -webkit-transform:
+            translate3d(-230px,640px,0)
+            rotate(-70deg);
+        opacity: 0;
+    }
+}
+
+@-webkit-keyframes falling2 {
+     0% {
+        -webkit-transform:
+            translate3d(0,0,0)
+            rotate(90deg);
+    }
+    
+    100% {
+        -webkit-transform:
+            translate3d(-400px,680px,0)
+            rotate(0deg);
+        opacity: 0;
+    }
+}
+/* leaves animation end------------------------------------------------------------------------------------------ */
+
+/* Navbar---------------------------------------------------------------------------------------------------- */
+.mynavbar {
+  font-family: 'Arial', sans-serif;
+  transition: background-color 0.3s ease-in-out;
+  backdrop-filter: blur(10px); /* Blur effect */
+}
+
+.navbar-brand {
+  font-weight: bold;
+  color: #ff0015;
+}
+
+.navbar-brand:hover {
+  color: #d0001b;
+}
+
+.heart-icon {
+  color: #ff4081;
+  font-size: 1.2rem;
+  animation: heartbeat 1.5s infinite;
+}
+
+/* Heartbeat Animation for Heart Icon */
+@keyframes heartbeat {
+  0%, 100% {
+      transform: scale(1);
+  }
+  50% {
+      transform: scale(1.2);
+  }
+}
+/* Navbar end------------------------------------------------------------------------------------------------------ */
+
+/* Home------------------------------------------------------------------------------ ----------------------------*/
+.home {
+  background-image: url("../img/floral2.png");
+  background-size: cover;
+  min-height: 100vh;
+  margin-top: -6rem;
+  padding-top: 15rem;
+  padding-bottom: 5rem;
+}
+.home h2,
+.info h2,
+.story h2,
+.gallery h2,
+.rspv h2,
+.gifts h2 {
+  color: var(--pink);
+  font-family: var(--secondary-font);
+  font-weight: bold;
+  font-size: 5rem;
+  animation:textGlow 2s ease-in-out infinite alternate;
+}
+
+.home h3 {
+  color: #444;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.home p {
+  font-size: 1.1rem;
+  color: #666;
+}
+
+.home .couple {
+  margin-top: 100px;
+}
+
+.home .couple h3 {
+  font-family: var(--secondary-font);
+  font-size: 2.4rem;
+  color: var(--pink);
+}
+
+.home .couple img {
+  width: 100%;
+  object-fit: cover;
+  filter: saturate(1);
+}
+
+.home .couple #Kiruthika {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  filter: saturate(1);
+}
+
+.home .heart {
+  width: 50px;
+  height: 50px;
+  background-color: white;
+  display: flex;
+  border-radius: 50%;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%) translateY(65px);
+  z-index: 10;
+}
+
+.home .heart i {
+  margin: auto;
+  color: var(--pink);
+}
+
+@media (max-width: 575.98px) {
+  .home .couple #Kiruthika {
+    height: 200px; /* Adjust height for smaller screens */
+  }
+}
+
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .home .couple #Kiruthika {
+    height: 220px; /* Slightly larger height for tablets */
+  }
+}
+
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .home .couple #Kiruthika {
+    height: 240px; /* Adjust height for medium devices */
+  }
+}
+
+@media (min-width: 992px) {
+  .home .couple #Kiruthika {
+    height: 260px; /* Default height for larger screens */
+  }
+}
+
+/* Home end------------------------------------------------------------------------------------------------- */
+
+
+/* Info--------------------------------------------------------------------------------------------------- */
+.info {
+  background-color: var(--bg);
+  color: white;
+  padding-top: 10rem;
+  padding-bottom: 8rem;
+}
+
+.info .alamat {
+  font-size: 1.1rem;
+}
+
+.info .description {
+  font-size: 1rem;
+  font-weight: 300;
+}
+
+.info .card {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  color: white !important;
+  border: 1px solid #999;
+}
+
+.info .card-header {
+  border-bottom: 1px solid #999;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+}
+
+.info .card-body {
+  font-size: 1rem;
+}
+
+.info .card-footer {
+  border-top: 1px solid #999;
+  font-size: 0.9rem;
+  font-weight: 300;
+}
+.card {
+  opacity: 0;
+  transform: translateY(50px);
+  animation: slideUp 1s forwards;
+}
+
+.card:nth-child(1) {
+  animation-delay: 0.2s;
+}
+
+.card:nth-child(2) {
+  animation-delay: 0.4s;
+}
+
+@keyframes slideUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.card .bi {
+  font-size: 2rem;
+  color: #ff4081;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+/* info end------------------------------------------------------------------------------------------------- */
+
+/* Story ----------------------------------------------------------------------------------------------------*/
+.story,
+.gallery,
+.rspv,
+.gifts {
+  padding-top: 10rem;
+  padding-bottom: 8rem;
+}
+
+.story span,
+.gallery span,
+.gifts span {
+  display: block;
+  text-transform: uppercase;
+  color: #666;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  margin-bottom: 1rem;
+}
+
+.story p,
+.gallery p,
+.rspv p,
+.gifts p {
+  font-size: 1rem;
+  font-weight: 300;
+}
+
+.timeline {
+  list-style: none;
+  padding: 1.4rem;
+  margin-top: 1rem;
+  position: relative;
+}
+
+.timeline::before {
+  content: "";
+  top: 0;
+  bottom: 0;
+  position: absolute;
+  width: 1px;
+  background-color: #ccc;
+  left: 50%;
+}
+
+.timeline li {
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.timeline li::before,
+.timeline li::after {
+  content: "";
+  display: table;
+}
+
+.timeline li::after {
+  clear: both;
+}
+
+.timeline li .timeline-image {
+  width: 160px;
+  height: 160px;
+  background-color: #ccc;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.timeline li .timeline-panel {
+  width: 40%;
+  float: left;
+  border: 1px solid #ccc;
+  padding: 2rem;
+  position: relative;
+  border-radius: 5px;
+  background-color: white;
+}
+
+.timeline li .timeline-panel::before {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background-color: #ccc;
+  border-top: 15px solid transparent;
+  border-left: 15px solid #ccc;
+  border-right: 0 solid #ccc;
+  border-bottom: 15px solid transparent;
+  transform: rotate(45deg);
+  z-index: -1;
+  right: -15px;
+  top: 80px;
+}
+
+.timeline li .timeline-panel::after {
+  content: "";
+  position: absolute;
+  display: inline-block;
+  border-top: 14px solid transparent;
+  border-left: 14px solid #fff;
+  border-right: 0 solid #fff;
+  border-bottom: 14px solid transparent;
+  right: -13px;
+  top: 81px;
+}
+
+.timeline li.timeline-inverted .timeline-panel {
+  float: right;
+}
+
+.timeline li.timeline-inverted .timeline-panel::before {
+  border-left-width: 0;
+  border-right-width: 15px;
+  right: auto;
+  left: -15px;
+}
+
+.timeline li.timeline-inverted .timeline-panel::after {
+  border-left-width: 0;
+  border-right-width: 14px;
+  right: auto;
+  left: -13px;
+}
+/* Story end -------------------------------------------------------------------------------------------------*/
+
+
+/* Gallery--------------------------------------------------------------------------------------------------- */
+/* Base styling for gallery */
+.gallery {
+  background-color: #f5f5f5;
+  padding: 60px 0;
+  overflow: hidden; /* Ensures smooth animation */
+}
+
+/* Flex container for rows */
+.gallery .row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 0.8s ease-in-out forwards;
+  animation-delay: 0.3s;
+}
+
+/* Keyframes for row animation */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Ensure images take full width inside their flex containers */
+.gallery .col {
+  flex: 1 1 calc(25% - 1rem); /* 4 columns layout */
+  max-width: calc(25% - 1rem); /* 4 columns layout */
+  margin-bottom: 1rem;
+  transition: transform 0.3s ease-in-out;
+}
+
+.gallery .col:hover {
+  transform: translateY(-10px); /* Lift effect on hover */
+}
+
+/* Styling for images */
+.gallery a img {
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  transform: scale(1);
+  opacity: 0;
+  animation: imgFadeIn 0.8s ease forwards;
+}
+.gallery a .video {
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  transform: scale(1);
+  opacity: 0;
+  animation: imgFadeIn 0.8s ease forwards;
+}
+
+/* Image Fade-in Animation */
+@keyframes imgFadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.gallery a:hover img {
+  transform: scale(1.08); /* Slight zoom on hover */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4); /* Enhanced shadow effect */
+}
+
+/* Loading animation for grid container */
+.gallery .grid-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 equal columns */
+  gap: 1rem;
+  opacity: 0;
+  animation: fadeInGrid 1s ease forwards;
+}
+
+/* Fade-in animation for grid */
+@keyframes fadeInGrid {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Responsive breakpoints */
+
+/* Extra Small Devices (Portrait Phones, less than 576px) */
+@media (max-width: 575.98px) {
+  .gallery .col {
+    flex: 1 1 calc(100% - 1rem); /* Full width on small screens */
+    max-width: calc(100% - 1rem);
+  }
+
+  .gallery .grid-container {
+    grid-template-columns: 1fr; /* 1 column for small devices */
+  }
+}
+
+/* Small Devices (Landscape Phones, 576px and up) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .gallery .col {
+    flex: 1 1 calc(50% - 1rem); /* 2 columns */
+    max-width: calc(50% - 1rem);
+  }
+
+  .gallery .grid-container {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns for small devices */
+  }
+}
+
+/* Medium Devices (Tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .gallery .col {
+    flex: 1 1 calc(33.33% - 1rem); /* 3 columns */
+    max-width: calc(33.33% - 1rem);
+  }
+
+  .gallery .grid-container {
+    grid-template-columns: repeat(3, 1fr); /* 3 columns for tablets */
+  }
+}
+
+/* Large Devices (Laptops, 992px and up) */
+@media (min-width: 992px) {
+  .gallery .col {
+    flex: 1 1 calc(25% - 1rem); /* 4 columns */
+    max-width: calc(25% - 1rem);
+  }
+
+  .gallery .grid-container {
+    grid-template-columns: repeat(4, 1fr); /* 4 columns */
+  }
+}
+
+/* Extra Large Devices (Desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  .gallery .col {
+    flex: 1 1 calc(25% - 1.5rem);
+    max-width: calc(25% - 1.5rem);
+  }
+
+  .gallery .grid-container {
+    grid-template-columns: repeat(4, 1fr); /* 4 columns */
+    gap: 1.5rem; /* Increase gap for larger screens */
+  }
+}
+
+/* Lightbox effect on image click */
+.gallery a:focus img, .gallery a:active img , .gallery a .video{
+  transform: scale(1.1); /* Scale effect on click */
+  box-shadow: 0 20px 30px rgba(0, 0, 0, 0.5); /* Larger shadow on focus */
+}
+
+/* Animation easing for smooth transitions */
+.gallery a img, .gallery a .video, .gallery .col {
+  transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+
+/* Gallery end---------------------------------------------------------------------------------------------- */
+
+/* RSVP Section---------------------------------------------------------------------------------------------- */
+.rsvp {
+  background-color: #f8f9fa;
+  padding: 60px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Heading and Text Animation */
+.rsvp h2 {
+  font-weight: bold;
+  color: var(--pink);
+  font-family: var(--secondary-font);
+  opacity: 0;
+  font-size: 5rem;
+  animation: fadeIn 1s forwards 0.2s, textGlow 2s ease-in-out infinite alternate;
+}
+
+/* Text Glow Animation */
+@keyframes textGlow {
+  from {
+    text-shadow: 0 0 10px rgba(255, 0, 255, 0.4);
+  }
+  to {
+    text-shadow: 0 0 20px rgba(255, 0, 255, 0.8);
+  }
+}
+
+.rsvp p.lead {
+  font-size: 1.1rem;
+  color: #6c757d;
+  margin-bottom: 30px;
+  opacity: 0;
+  animation: fadeIn 1s forwards 0.4s;
+}
+
+/* Form Controls */
+.rsvp .form-control,
+.rsvp .form-select {
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+  opacity: 0;
+  animation: fadeInUp 0.8s forwards;
+}
+
+/* Focus Effect */
+.rsvp .form-control:focus,
+.rsvp .form-select:focus {
+  border-color: #0d6efd;
+  box-shadow: 0 0 10px rgba(13, 110, 253, 0.5);
+  transform: scale(1.02);
+}
+
+/* Input Group Text (icons) */
+.rsvp .input-group-text {
+  background-color: #0d6efd;
+  color: white;
+  border-radius: 10px 0 0 10px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.rsvp .input-group-text:hover {
+  transform: rotate(15deg); /* Icon rotation on hover */
+}
+
+/* Submit Button */
+.rsvp .btn {
+  border-radius: 30px;
+  padding: 15px 30px;
+  width: 100%;
+  background-color: #0d6efd;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 500;
+  transition: background-color 0.3s ease-in-out, transform 0.2s ease;
+  opacity: 0;
+  animation: fadeInUp 0.8s forwards 0.6s, pulseEffect 1.5s infinite;
+}
+
+/* Pulse Effect for Submit Button */
+@keyframes pulseEffect {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 rgba(0, 110, 253, 0.4);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(0, 110, 253, 0.6);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 rgba(0, 110, 253, 0.4);
+  }
+}
+
+/* Button Hover Effect */
+.rsvp .btn:hover {
+  background-color: #0056b3;
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(0, 86, 179, 0.3);
+}
+
+/* Success/Error Message */
+#form-message {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #28a745;
+  margin-top: 20px;
+  opacity: 0;
+  animation: fadeIn 1s forwards 0.8s, bounceEffect 1s infinite;
+}
+
+/* Bounce Effect for Success/Error Message */
+@keyframes bounceEffect {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Background Animation */
+.rsvp::before {
+  content: '';
+  position: absolute;
+  top: -50px;
+  left: -50px;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(255, 0, 255, 0.4), transparent);
+  z-index: -1;
+  animation: bgPulse 3s ease-in-out infinite;
+}
+
+/* Background Pulse Animation */
+@keyframes bgPulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+}
+
+/* Responsive Layout */
+
+/* Medium Devices (Tablets, 768px and up) */
+@media (min-width: 768px) {
+  #my-form {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns on medium screens */
+  }
+
+  #my-form .text-center {
+    grid-column: span 2; /* Submit button takes full width */
+  }
+}
+
+/* Large Devices (Laptops, 992px and up) */
+@media (min-width: 992px) {
+  #my-form {
+    grid-template-columns: repeat(3, 1fr); /* 3 columns on large screens */
+  }
+
+  #my-form .text-center {
+    grid-column: span 3; /* Submit button takes full width */
+  }
+}
+
+/* Animations */
+
+/* Fade In Effect */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Fade In from Bottom */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Rspv end---------------------------------------------------------------------------------------------------- */
+
+/* Footer------------------------------------------------------------------------------------------------------- */
+footer {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  background-color: var(--pink);
+  color: white;
+}
+
+
+
+
+/* Extra Large */
+@media (max-width: 1200px) {
+  .home .heart {
+    transform: translateX(-50%) translateY(45px);
+  }
+}
+
+/* Laptop */
+@media (max-width: 992px) {
+  html {
+    font-size: 75%;
+  }
+
+  .home .heart {
+    display: none;
+  }
+
+  .simply-countdown > .simply-section .simply-amount {
+    padding: 70px;
+  }
+
+  .timeline::before {
+    left: 60px;
+  }
+
+  .timeline li .timeline-image {
+    left: 15px;
+    margin-left: 45px;
+    top: 16px;
+  }
+
+  .timeline li .timeline-panel {
+    width: calc(100% - 200px);
+    float: right;
+  }
+
+  .timeline li .timeline-panel::before {
+    border-left-width: 0;
+    border-right-width: 15px;
+    right: auto;
+    left: -15px;
+  }
+
+  .timeline li .timeline-panel::after {
+    border-left-width: 0;
+    border-right-width: 14px;
+    right: auto;
+    left: -13px;
+  }
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  html {
+    font-size: 65%;
+  }
+
+  .home .heart {
+    display: none;
+  }
+
+  .simply-countdown > .simply-section .simply-amount {
+    padding: 60px;
+    margin: 5px;
+  }
+
+  .mynavbar .offcanvas-title {
+    text-align: center;
+  }
+
+  .mynavbar .nav-link {
+    font-size: 2rem;
+    text-align: center;
+  }
+
+  .timeline li .timeline-image {
+    width: 140px;
+    height: 140px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+  html {
+    font-size: 60%;
+  }
+
+  .home .heart {
+    display: none;
+  }
+
+  #count {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .simply-countdown > .simply-section {
+    float: none;
+  }
+
+
+  .simply-countdown > .simply-section .simply-amount {
+    font-size: 40px;
+    padding: 25px;
+    margin: 3px;
+    z-index: 1;
+  }
+
+  .timeline li .timeline-image {
+    width: 80px;
+    height: 80px;
+  }
+
+  .timeline li .timeline-panel {
+    width: 65%;
+    transform: translateX(-10px);
+  }
+
+  .timeline li .timeline-panel::before {
+    top: 30px;
+  }
+
+  .timeline li .timeline-panel::after {
+    top: 31px;
+  }
+}
+
+
+
+.gifts {
+  padding: 60px 0;
+  position: relative;
+  overflow: hidden; /* Ensures decorative elements don't overflow */
+}
+
+/* Subtitle style */
+.subtitle {
+  font-size: 1.2rem;
+  color: #333;
+  opacity: 0;
+  animation: fadeIn 1s forwards;
+  animation-delay: 0.3s;
+}
+
+
+/* Description style */
+.description {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 30px;
+  opacity: 0;
+  animation: fadeInUp 1s forwards;
+  animation-delay: 0.9s;
+}
+
+/* Button style */
+.btn-primary {
+  display: inline-block;
+  padding: 12px 20px;
+  background-color: #f45d69; /* Bright button color */
+  color: white;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  opacity: 0;
+  animation: fadeInUp 1s forwards;
+  animation-delay: 1.2s;
+}
+
+.btn-primary:hover {
+  background-color: #c1353d; /* Darker on hover */
+  transform: translateY(-3px);
+}
+
+/* List group item */
+.list-group-item {
+  position: relative;
+  padding: 15px 20px;
+  border: none; /* Remove border */
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  background-color: #ffffff; /* White background */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Deeper shadow */
+  border-radius: 8px; /* More rounded corners */
+}
+
+/* Hover effect on list items */
+.list-group-item:hover {
+  transform: translateY(-5px);
+  background-color: #ffe6f2; /* Light pink background on hover */
+}
+
+/* Icon style */
+.icon {
+  font-size: 24px; /* Icon size */
+  color: #f45d69; /* Match button color */
+  margin-right: 10px; /* Space between icon and name */
+}
+
+/* Fade-in animation keyframes */
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Animation for each gift name */
+.gift-name {
+  opacity: 0;
+  animation: fadeIn 0.5s forwards;
+  animation-delay: calc(0.5s + var(--i, 0s)); /* Use variable for staggered effect */
+}
+
+.list-group-item:nth-child(1) .gift-name { --i: 0s; }
+.list-group-item:nth-child(2) .gift-name { --i: 0.1s; }
+.list-group-item:nth-child(3) .gift-name { --i: 0.2s; }
+
+/* Decorative Elements */
+.gifts::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("../img/decorative-pattern.png"); /* Use a decorative pattern */
+  opacity: 0.1; /* Subtle background */
+  z-index: 0;
+}
+

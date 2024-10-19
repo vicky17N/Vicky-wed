@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="msapplication-TileColor" content="#E96064"><!-- Change this color -->
+    <link rel="icon" href="path/to/your/favicon.ico" type="image/x-icon">
+    <title>Vicky's Wedding</title>
+    <link rel="shortcut icon" href="./img/vignesh.jpg" type="image/x-icon">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous"
+    />
+    <link
+      href="./style/bootstrap/css/bootstrap-grid.min.css"
+      rel="stylesheet"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+    />
+    <link
+      rel="stylesheet"
+      href="./style/bootstrap/css/bootstrap-icon-1.10.5.css"
+    />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sacramento&family=Work+Sans:wght@100;300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link href="./style/sacramento_work_sans.css" rel="stylesheet" />
+    <!-- Countdown CSS -->
+    <link rel="stylesheet" href="./style/simplyCountdown.theme.default.css" />
+    <!-- Adding Google Fonts for better typography -->
+    <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Poppins:wght@300;400;600&display=swap"
+    rel="stylesheet"
+    />
+    <!-- Custom Styling -->
+    <link rel="stylesheet" href="./style/style.css" />
+      <!-- loader -->
+      <link href="https://fonts.googleapis.com/css?family=Lovers+Quarrel" rel="stylesheet">
+</head>
+  <body>
+  <!-- Loader Container -->
+  <div id="wedding-loader">
+    <div class="message">Welcome to Our Special Day</div>
+    <i class="fa fa-heart ms-1 heart-icon"></i>
+    <div class="date">Vignesh&nbsp; & Kiruthika</div>
+    <div id="petals-container"></div>
+  </div>
+  <!-- Loader end -->
+
+    <div id="leaves">
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i> 
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i> 
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i> 
+    </div>
+  
+  <!-- home section -->
+  <section 
+      id="hero"
+      class="hero w-100 h-100 p-3 margin-auto text-center d-flex justify-content-center align-items-center text-white"
+    >
+      <main>
+        <h4>Dear Mr./Mrs./Family,</h4>
+        <h1><span class="Vicky">Vignesh</span> & <span class="Kiruthika">Kiruthika</span></h1>
+        <p>Will hold a wedding reception in:</p>
+        <div id="count" class="simply-countdown"></div>
+        <div id="notification" style="display: none;">
+          <span id="notificationMessage"></span>
+          <button id="dismissButton">X</button>
+        </div>
+        <a
+          href="#home"
+          class="btn btn-lg mt-4"
+          onclick="return enableScroll()"
+          id="viewInvitationButton"
+          >View Invitation</a
+        >
+      </main>
+    </section>
+  <!-- home section end -->
+
+<!-- Navbar Start -->
+<nav class="navbar navbar-expand bg-transparent sticky-top mynavbar">
+  <div class="container">
+    <!-- Brand and Heart Icon -->
+    <a class="navbar-brand" href="#">
+      <span class="Vicky">Vignesh</span> 
+      <i class="fa fa-heart ms-1 heart-icon"></i> 
+      <span class="Kiruthika">Kiruthika</span>
+    </a>
+  </div>
+</nav>
+
+<!-- Navbar end -->
+
+<!-- wedding ceremony -->
+    <section id="home" class="home">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-md-8 text-center">
+            <h2>Wedding Ceremony</h2>
+            <h3>Held on Sunday, May 28, 2025</h3>
+            <p>
+              Therefore, we sincerely invite you to attend our wedding ceremony.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="row couple">
+        <div class="col-lg-6">
+          <div class="row">
+            <div class="col-8 text-end">
+              <h3>Vignesh</h3>
+              <p>
+                We wholeheartedly invite you to celebrate the joyful union of our beloved son as he embarks on a remarkable journey of love, togetherness, companionship, and wedded bliss.              </p>
+              <p>
+                Son of Mr. Perumal <br />
+                and <br />
+                Mrs. Kavitha
+                <br>Hari Haran P (Younger Brother)
+              </p>
+            </div>
+            <div class="col-4">
+              <img
+                id="Vicky"
+                src="./img/vignesh.jpg"
+                alt="Vignesh"
+                class="img-responsive rounded-circle"
+              />
+            </div>
+          </div>
+        </div>
+
+        <span class="heart"> <i class="fa fa-heart heart-icon"></i> </span>
+
+        <div class="col-lg-6">
+          <div class="row">
+            <div class="col-4">
+              <img
+              id="Kiruthika"
+                src="./img/kiruthika.jpg"
+                alt="Fiancee"
+                class="img-responsive rounded-circle"
+              />
+            </div>
+            <div class="col-8 text-start">
+              <h3>Kiruthika</h3>
+              <p>
+                We wholeheartedly invite you to celebrate the joyful union of our beloved daughter as she embarks on a remarkable journey of love, togetherness, companionship, and wedded bliss.
+              </p>
+              <p>
+                Daughter of Mr. Maruthakavi <br />
+                and <br />
+                Mrs. Anandhi
+                <br>Vinothkumar M (Elder Brother)
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+<!-- wedding ceremony end -->
+
+<!-- info section -->
+    <section id="info" class="info">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-md-8 col-10 text-center">
+            <h2>Event Information</h2>
+            <p class="alamat">
+              Address: Chennai, Tamil Nadu.
+            </p>
+            <a
+              href="https://maps.app.goo.gl/tztvD2xn1Yd4sVNf9"
+              target="_blank"
+              class="btn btn-light btn-sm my-4"
+              >Click to open map</a>
+              <br>
+            <span>( or )</span>
+            <br>
+            <p>Scan the QR code to open the map:</p>
+            <img class="img-fluid" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://maps.app.goo.gl/tztvD2xn1Yd4sVNf9" alt="QR Code">
+
+            <br>
+            <p class="description" style="color: white;">
+              Please ensure you have the correct address and date. If you arrive
+              at the destination and there are no signs of a wedding ceremony,
+              you may have the wrong schedule or place.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-center mt-4">
+        <div class="col-md-5 col-10">
+          <div class="card text-center text-bg-light mb-5">
+            <div class="card-header">Wedding Ceremony</div>
+            <div class="card-body">
+              <div class="row justify-content-center">
+                <div class="col-md-6">
+                  <i class="bi bi-clock d-block"></i>
+                  <span>08:00 AM - 10:00 AM</span>
+                </div>
+                <div class="col-md-6">
+                  <i class="bi bi-calendar-event d-block"></i>
+                  <span>Wednesday, May 28, 2025</span>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer">
+              During the event, please maintain a conducive atmosphere to
+              preserve the solemnity of the entire process.
+            </div>
+          </div>
+        </div>
+        <div class="col-md-5 col-10">
+          <div class="card text-center text-bg-light">
+            <div class="card-header">Reception</div>
+            <div class="card-body">
+              <div class="row justify-content-center">
+                <div class="col-md-6">
+                  <i class="bi bi-clock d-block"></i>
+                  <span>11:00 AM - Until Finished</span>
+                </div>
+                <div class="col-md-6">
+                  <i class="bi bi-calendar-event d-block"></i>
+                  <span>Wednesday, May 28, 2025</span>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer">
+              During the event, please maintain a conducive atmosphere to
+              preserve the solemnity of the entire process.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  <!-- info section end -->
+
+  <!-- story section -->
+
+    <section id="story" class="story">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-md-8 col-10 text-center">
+            <span>How did our love blossom?</span>
+            <h2>Our Story</h2>
+            <p>
+                As blossoms bloom beneath the sun,Together, we are two souls as one.
+            </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <ul class="timeline">
+              <li>
+                <div
+                  class="timeline-image"
+                  style="background-image: url(https://picsum.photos/300/300)"
+                ></div>
+                <div class="timeline-panel">
+                  <div class="timeline-heading">
+                    <h3>First Met</h3>
+                    <span>April 01, 2023</span>
+                  </div>
+                  <div class="timeline-body">
+                    <p>
+                      In that fleeting glance, our worlds aligned,
+                      Two hearts entwined, a love undefined.
+                      A spark ignited, a story began,
+                      Forever bound since that first meeting span.
+                    </p>
+                  </div>
+                </div>
+              </li>
+              <li class="timeline-inverted">
+                <div
+                  class="timeline-image"
+                  style="background-image: url(https://picsum.photos/300/301)"
+                ></div>
+                <div class="timeline-panel">
+                  <div class="timeline-heading">
+                    <h3>First Dating</h3>
+                    <span>April 14, 2023</span>
+                  </div>
+                  <div class="timeline-body">
+                    <p>
+                      Beneath the stars, we shared a smile,
+                      Each word lingered, holding time awhile.
+                      In gentle whispers, a bond was made,
+                      A chapter of love, softly displayed.
+                    </p>
+                  </div>
+                </div>
+              </li>
+              <!-- Add more timeline items as needed -->
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+<!-- story section end -->
+
+<!-- gallery section -->
+    <section id="gallery" class="gallery">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-md-8 col-10 text-center">
+            <span>Memories of Our Story</span>
+            <h2>Photo Gallery</h2>
+            <p>
+              In every glance, a tale unfolds,
+              Each laugh and tear, a treasure we hold
+            </p>
+          </div>
+        </div>
+        
+        <!-- Flexbox Grid Row -->
+        <div class="row">
+          <div class="col">
+            <a href="#!" data-toggle="lightbox">
+              <video class="video" src="./img/video.mp4" ></video>
+            </a>
+          </div>
+          <div class="col">
+            <a href="https://picsum.photos/id/101/1200/765" data-toggle="lightbox">
+              <img src="https://picsum.photos/id/101/300/400" alt="Image 2" />
+            </a>
+          </div>
+          <div class="col">
+            <a href="https://picsum.photos/id/102/1200/765" data-toggle="lightbox">
+              <img src="https://picsum.photos/id/102/300/400" alt="Image 3" />
+            </a>
+          </div>
+          <div class="col">
+            <a href="https://picsum.photos/id/103/1200/765" data-toggle="lightbox">
+              <img src="https://picsum.photos/id/103/300/400" alt="Image 4" />
+            </a>
+          </div>
+          <!-- Add more columns as needed -->
+        </div>
+      </div>
+    </section>
+  <!-- gallery section end -->
+
+  <!-- Attendance section -->
+    <section id="rsvp" class="rsvp py-5">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-md-8 col-10 text-center">
+            <h2 class="display-5">Confirm Your Attendance</h2>
+            <p class="lead">
+              Please fill out the form below to confirm your attendance!
+            </p>
+          </div>
+        </div>
+    
+        <div class="row justify-content-center mt-4">
+          <form
+            id="my-form"
+            class="d-grid gap-3 justify-content-center"
+            method="POST"
+            action="https://formspree.io/f/xnnaevjy"
+          >
+            <!-- Name Field -->
+            <div class="input-group">
+              <span class="input-group-text"><i class="bi bi-person"></i></span>
+              <input
+                type="text"
+                class="form-control"
+                name="Name"
+                id="Name"
+                placeholder="Enter your name"
+                required
+              />
+            </div>
+    
+            <!-- Number of Attendees Field -->
+            <div class="input-group">
+              <span class="input-group-text"><i class="bi bi-people"></i></span>
+              <input
+                type="number"
+                class="form-control"
+                name="Members"
+                id="Members"
+                min="1"
+                max="5"
+                value="1"
+                placeholder="Maximun 5 Members"
+                required
+              />
+            </div>
+    
+            <!-- Confirmation Field -->
+            <div class="input-group">
+              <span class="input-group-text"><i class="bi bi-check-circle"></i></span>
+              <select
+                name="status"
+                id="status"
+                class="form-select"
+                required
+              >
+                <option value="" disabled selected>Select one</option>
+                <option value="Not Attending">Not Attending</option>
+                <option value="Attending">Attending</option>
+              </select>
+            </div>
+    
+            <!-- Submit Button -->
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary btn-lg w-100 mt-3">
+                <i class="bi bi-send"></i> Submit
+              </button>
+            </div>
+          </form>
+        </div>
+    
+        <!-- Success/Error Message -->
+        <div id="form-message" class="text-center mt-4"></div>
+      </div>
+    </section>
+  <!-- Attendance section end   -->
+
+<!-- gifts section -->
+<section id="gifts" class="gifts">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8 col-10 text-center">
+        <span class="subtitle">Expressions of Affection</span>
+        <h2 class="title">Send Gifts</h2>
+        <p class="description">
+          Show your love and appreciation with a thoughtful gift. Choose the perfect surprise!
+        </p>
+        <a href="#" class="btn-primary">Explore Gifts</a>
+      </div>
+    </div>
+    <div class="row justify-content-center text-center">
+      <div class="col-md-6">
+        <ul class="list-group">
+          <li class="list-group-item mt-2">
+            <div class="icon">&#10084;</div>
+            <div class="font-weight-bold gift-name">Vignesh</div>
+          </li>
+          <li class="list-group-item mt-2">
+            <div class="icon">&#10084;</div>
+            <div class="font-weight-bold gift-name">Rahul</div>
+          </li>
+          <li class="list-group-item mt-2">
+            <div class="icon">&#10084;</div>
+            <div class="font-weight-bold gift-name">Yokesh</div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- gifts section end -->
+    
+<!-- map section -->
+    <section>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3917.345755764976!2d78.08706787934572!3d10.937233299999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3baa2ff294346a4b%3A0x18caea9ae6068e92!2sArulmigu%20Sree%20Kalyana%20Venkataramanaswamy%20Temple!5e0!3m2!1sen!2sin!4v1727533016751!5m2!1sen!2sin" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </section>
+  <!-- map section end -->
+
+<!-- footer section  -->
+    <footer class="mt-4">
+      <div class="container text-white">
+        <div class="row">
+          <div class="col text-center">
+            <small class="d-block">
+              Design By : 
+              <a
+                href="https://www.linkedin.com/in/vigneshwaran-n-96b15b216/"
+                class="text-decoration-none text-white"
+                ><i class="fa fa-heart pulse"></i></a
+              >
+            </small>
+          </div>
+        </div>
+      </div>
+    </footer>
+<!-- footer section end -->
+
+    <!-- Bootstrap JS -->
+    <!-- jquery cdn -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="./style/bootstrap/js/bootstrap.bundle.min.js"
+      integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Countdown JS -->
+    <script src="./script/simplyCountdown.min.js"></script>
+    <!-- scroll reveal anim -->
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <!-- Custom Scripts -->
+    <script src="script/script.js"></script>
+  </body>
+</html>
