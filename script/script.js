@@ -118,8 +118,7 @@ function disableScroll() {
 function enableScroll() {
     window.onscroll = function () {};
     elementRoot.style.scrollBehavior = "smooth";
-    localStorage.removeItem('opened');
-    // localStorage.setItem("opened", "true"); 
+    localStorage.setItem("opened", "true"); 
     hideNotification(); // Hide notification
 }
 
