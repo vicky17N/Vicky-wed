@@ -110,9 +110,6 @@ function disableScroll() {
     window.onscroll = function () {
         window.scrollTo(scrollTop, scrollLeft);
     };
-
-    elementRoot.style.scrollBehavior = "auto";
-    showNotification("Please click the button to proceed."); // Show notification
 }
 
 function enableScroll() {
