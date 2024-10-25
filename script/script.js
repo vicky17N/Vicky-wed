@@ -168,23 +168,23 @@ document.addEventListener("scroll", function() {
 //Disable scroll End-----------------------------------------------------------------------------------------------
 
 //Attendance Form---------------------------------------------------------------------------------------------------
-      // window.addEventListener("load", function () {
-      //   const form = document.getElementById("my-form");
-      //   form.addEventListener("submit", function (e) {
-      //     e.preventDefault();
-      //     const data = new FormData(form);
-      //     const action = e.target.action;
-      //     fetch(action, {
-      //       method: "POST",
-      //       body: data,
-      //     }).then(() => {
-      //       alert("Attendance Confirmation Successfully Sent!");
-      //     });
-      //   });
-      // });
+      window.addEventListener("load", function () {
+        const form = document.getElementById("my-form");
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+          const data = new FormData(form);
+          const action = e.target.action;
+          fetch(action, {
+            method: "POST",
+            body: data,
+          }).then(() => {
+            alert("Attendance Confirmation Successfully Sent!");
+          });
+        });
+      });
 
-      // document.getElementById("my-form").addEventListener("submit", function (event) {
-      //   event.preventDefault();
+      document.getElementById("my-form").addEventListener("submit", function (event) {
+        event.preventDefault();
         
         let name = document.getElementById("Name").value;
         let attendees = document.getElementById("Members").value;
