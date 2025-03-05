@@ -15,6 +15,25 @@ document.addEventListener('copy', (event) => {
     alert("Don't copy anything");
 });
 
+        // Disable right-click context menu
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+
+        // Disable image dragging
+        document.querySelectorAll('img').forEach(img => {
+            img.addEventListener('dragstart', function(e) {
+                e.preventDefault();
+            });
+        });
+
+        // Disable Ctrl+S, Ctrl+P, and other save actions
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && (e.key === 's' || e.key === 'p' || e.key === 'u' || e.key === 'Shift+I')) {
+                e.preventDefault();
+            }
+        });
+
 //Loader start-------------------------------------------------------------------------------------------------------------
       document.addEventListener("DOMContentLoaded", function () {
         const petalContainer = document.getElementById("petals-container");
