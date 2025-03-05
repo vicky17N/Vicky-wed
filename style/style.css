@@ -19,7 +19,10 @@ body {
   font-family: var(--primary-font);
 
 }
-
+ img {
+    -webkit-user-drag: none; /* For Safari */
+    user-drag: none; /* For other browsers */
+}
 html::-webkit-scrollbar {
   width: 0.5rem;
 }
