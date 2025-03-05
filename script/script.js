@@ -6,7 +6,14 @@
         }, 500, 'linear')
     });
 // smooth scrolling---------------------------------------------------------------------------------------
+document.addEventListener('copy', (event) => {
+    event.preventDefault();  // Prevent the default copy behavior
 
+    // You can modify the clipboard content or just clear it
+    event.clipboardData.setData('text/plain', '');  // Clears the copied content
+
+    alert("Don't copy anything");
+});
 
 //Loader start-------------------------------------------------------------------------------------------------------------
       document.addEventListener("DOMContentLoaded", function () {
