@@ -34,6 +34,76 @@ document.addEventListener('copy', (event) => {
             }
         });
 
+
+
+// Disable PrintScreen (PrtSc)
+document.addEventListener("keyup", function (event) {
+    if (event.key === "PrintScreen") {
+        let overlay = document.createElement("div");
+        overlay.style.position = "fixed";
+        overlay.style.top = "0";
+        overlay.style.left = "0";
+        overlay.style.width = "100vw";
+        overlay.style.height = "100vh";
+        overlay.style.background = "black";
+        overlay.style.zIndex = "9999";
+        document.body.appendChild(overlay);
+        setTimeout(() => document.body.removeChild(overlay), 500);
+        alert("Screenshots are disabled on this website.");
+    }
+});
+
+// Disable Right-Click
+document.addEventListener("contextmenu", function (event) {
+    event.preventDefault();
+    alert("Right-click is disabled.");
+});
+
+// Disable Developer Tools (F12, Ctrl + Shift + I/J, Ctrl + U)
+document.addEventListener("keydown", function (event) {
+    if (
+        event.keyCode === 123 || // F12
+        (event.ctrlKey && event.shiftKey && event.key === "I") || // Ctrl + Shift + I
+        (event.ctrlKey && event.shiftKey && event.key === "J") || // Ctrl + Shift + J
+        (event.ctrlKey && event.key === "U") // Ctrl + U
+    ) {
+        event.preventDefault();
+        alert("Developer tools are disabled.");
+    }
+});
+
+// Disable Print (Ctrl + P)
+document.addEventListener("keydown", function (event) {
+    if (event.ctrlKey && event.key === "p") {
+        event.preventDefault();
+        alert("Printing is disabled.");
+    }
+});
+
+// Trick to Detect Screen Recording
+function detectScreenRecording() {
+    navigator.mediaDevices.getDisplayMedia({ video: true })
+        .then(() => {
+            alert("Screen recording detected! This is not allowed.");
+            document.body.innerHTML = "";
+        })
+        .catch(() => {});
+}
+setInterval(detectScreenRecording, 5000);
+
+// Trick to Detect Mobile Screenshots (Experimental)
+let lastScrollHeight = document.documentElement.scrollHeight;
+setInterval(() => {
+    if (document.documentElement.scrollHeight !== lastScrollHeight) {
+        alert("Screenshot detected! This is not allowed.");
+        document.body.innerHTML = "";
+    }
+    lastScrollHeight = document.documentElement.scrollHeight;
+}, 5000);
+
+
+
+
 //Loader start-------------------------------------------------------------------------------------------------------------
       document.addEventListener("DOMContentLoaded", function () {
         const petalContainer = document.getElementById("petals-container");
