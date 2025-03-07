@@ -13,6 +13,37 @@ html {
   overflow-x: hidden;
   scroll-behavior: smooth;
 }
+html, body {
+            -webkit-user-select: none; 
+            -moz-user-select: none;
+            -ms-user-select: none; 
+            user-select: none;
+        }
+
+        /* Hide content when PrintScreen is detected */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: black;
+            z-index: 9999;
+        }
+        
+        /* Prevent screen recording (trick) */
+        @media (prefers-reduced-motion: no-preference) {
+            body {
+                animation: anti-record 0.5s infinite;
+            }
+        }
+        
+        @keyframes anti-record {
+            0% { opacity: 1; }
+            50% { opacity: 0.99; }
+            100% { opacity: 1; }
+        }
 
 body {
   font-size: 1.2rem;
