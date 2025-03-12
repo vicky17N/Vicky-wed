@@ -80,26 +80,6 @@ document.addEventListener("keydown", function (event) {
     }
 });
 
-// Trick to Detect Screen Recording
-function detectScreenRecording() {
-    navigator.mediaDevices.getDisplayMedia({ video: true })
-        .then(() => {
-            alert("Screen recording detected! This is not allowed.");
-            document.body.innerHTML = "";
-        })
-        .catch(() => {});
-}
-setInterval(detectScreenRecording, 5000);
-
-// Trick to Detect Mobile Screenshots (Experimental)
-let lastScrollHeight = document.documentElement.scrollHeight;
-setInterval(() => {
-    if (document.documentElement.scrollHeight !== lastScrollHeight) {
-        alert("Screenshot detected! This is not allowed.");
-        document.body.innerHTML = "";
-    }
-    lastScrollHeight = document.documentElement.scrollHeight;
-}, 5000);
 
 
 
