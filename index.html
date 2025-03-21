@@ -568,7 +568,6 @@
     <script src="script/script.js"></script>
 
 
-
 <script type="module">
   // Import Firebase SDKs
   import { initializeApp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js";
@@ -578,7 +577,7 @@
   const firebaseConfig = {
     apiKey: "AIzaSyBgVbdPV4G7CFljXzJo3Cg4Xe6LaxfhJF8",
     authDomain: "vickywed-b109f.firebaseapp.com",
-    databaseURL: "https://vickywed-b109f-default-rtdb.firebaseio.com/",  // Add this line (Realtime Database URL)
+    databaseURL: "https://vickywed-b109f-default-rtdb.firebaseio.com/",
     projectId: "vickywed-b109f",
     storageBucket: "vickywed-b109f.appspot.com",
     messagingSenderId: "1095774947698",
@@ -590,26 +589,51 @@
   const app = initializeApp(firebaseConfig);
   const database = getDatabase(app);
 
-  // Create a live members bar
   document.addEventListener("DOMContentLoaded", function () {
+      // Create the live members bar
       let liveBar = document.createElement("div");
       liveBar.id = "liveMembersBar";
+      liveBar.innerHTML = `<span id="heart">❤️</span> <span id="liveCount">0</span> lovely guests are with us! <span id="heart">❤️</span>`;
+      
+      // Styling the bar
       liveBar.style.position = "fixed";
-      liveBar.style.top = "0";
-      liveBar.style.left = "0";
-      liveBar.style.width = "100%";
-      liveBar.style.padding = "10px";
-      liveBar.style.background = "rgba(0, 0, 0, 0.6)"; // Light transparent background
+      liveBar.style.top = "10px";
+      liveBar.style.left = "50%";
+      liveBar.style.transform = "translateX(-50%)";
+      liveBar.style.padding = "12px 20px";
+      liveBar.style.background = "rgba(255, 105, 180, 0.8)"; // Soft pink transparent
       liveBar.style.color = "#fff";
-      liveBar.style.textAlign = "center";
-      liveBar.style.fontSize = "16px";
+      liveBar.style.fontSize = "18px";
+      liveBar.style.fontWeight = "bold";
+      liveBar.style.borderRadius = "25px";
+      liveBar.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.2)";
+      liveBar.style.animation = "fadeIn 1s ease-in-out";
       liveBar.style.zIndex = "1000";
 
       document.body.prepend(liveBar);
 
+      // CSS Animation
+      let style = document.createElement("style");
+      style.innerHTML = `
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(-10px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes heartbeat {
+          0% { transform: scale(1); }
+          50% { transform: scale(1.2); }
+          100% { transform: scale(1); }
+        }
+        #heart {
+          display: inline-block;
+          animation: heartbeat 1s infinite;
+        }
+      `;
+      document.head.appendChild(style);
+
       // Function to update live members count
       function updateLiveMembers(count) {
-          liveBar.textContent = `🔴 Live Members: ${count}`;
+          document.getElementById("liveCount").textContent = count;
       }
 
       // Listen for real-time updates from Firebase
@@ -630,7 +654,6 @@
       window.addEventListener("beforeunload", () => updateUserCount(-1));
   });
 </script>
-
 
 
 
