@@ -566,5 +566,73 @@
     <script src="https://unpkg.com/scrollreveal"></script>
     <!-- Custom Scripts -->
     <script src="script/script.js"></script>
+
+
+
+script type="module">
+  // Import Firebase SDKs
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js";
+  import { getDatabase, ref, onValue, runTransaction } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-database.js";
+
+  // Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyBgVbdPV4G7CFljXzJo3Cg4Xe6LaxfhJF8",
+    authDomain: "vickywed-b109f.firebaseapp.com",
+    databaseURL: "https://vickywed-b109f-default-rtdb.firebaseio.com/",  // Add this line (Realtime Database URL)
+    projectId: "vickywed-b109f",
+    storageBucket: "vickywed-b109f.appspot.com",
+    messagingSenderId: "1095774947698",
+    appId: "1:1095774947698:web:a64752629b4ee2287bf5eb",
+    measurementId: "G-RB5MQPVPFV"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const database = getDatabase(app);
+
+  // Create a live members bar
+  document.addEventListener("DOMContentLoaded", function () {
+      let liveBar = document.createElement("div");
+      liveBar.id = "liveMembersBar";
+      liveBar.style.position = "fixed";
+      liveBar.style.top = "0";
+      liveBar.style.left = "0";
+      liveBar.style.width = "100%";
+      liveBar.style.padding = "10px";
+      liveBar.style.background = "rgba(0, 0, 0, 0.6)"; // Light transparent background
+      liveBar.style.color = "#fff";
+      liveBar.style.textAlign = "center";
+      liveBar.style.fontSize = "16px";
+      liveBar.style.zIndex = "1000";
+
+      document.body.prepend(liveBar);
+
+      // Function to update live members count
+      function updateLiveMembers(count) {
+          liveBar.textContent = `🔴 Live Members: ${count}`;
+      }
+
+      // Listen for real-time updates from Firebase
+      const usersRef = ref(database, "liveUsers");
+      onValue(usersRef, (snapshot) => {
+          updateLiveMembers(snapshot.val() || 0);
+      });
+
+      // Simulate user joining and leaving
+      function updateUserCount(change) {
+          runTransaction(usersRef, (currentCount) => (currentCount || 0) + change);
+      }
+
+      // Increase count when user visits
+      updateUserCount(1);
+
+      // Decrease count when user leaves
+      window.addEventListener("beforeunload", () => updateUserCount(-1));
+  });
+</script>
+
+
+
+
   </body>
 </html>
