@@ -1,34 +1,3 @@
-document.addEventListener("DOMContentLoaded", function () {
-    // Create the live members bar
-    let liveBar = document.createElement("div");
-    liveBar.id = "liveMembersBar";
-    liveBar.style.position = "fixed";
-    liveBar.style.top = "0";
-    liveBar.style.left = "0";
-    liveBar.style.width = "100%";
-    liveBar.style.padding = "10px";
-    liveBar.style.background = "rgba(0, 0, 0, 0.6)"; // Light transparent background
-    liveBar.style.color = "#fff";
-    liveBar.style.textAlign = "center";
-    liveBar.style.fontSize = "16px";
-    liveBar.style.zIndex = "1000";
-    
-    document.body.prepend(liveBar);
-
-    let membersCount = Math.floor(Math.random() * 100) + 50; // Initial count
-
-    function updateLiveMembers() {
-        let variation = Math.floor(Math.random() * 5) - 2; // Random change between -2 and +2
-        membersCount = Math.max(50, membersCount + variation); // Keep count above 50
-        liveBar.textContent = `🔴 Live Members: ${membersCount}`;
-    }
-
-    updateLiveMembers();
-    setInterval(updateLiveMembers, 5000);
-});
-
-
-
 // smooth scrolling--------------------------------------------------------------------------------
       $('a[href*="#"]').on('click', function (e) {
         e.preventDefault();
