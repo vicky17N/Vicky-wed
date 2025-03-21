@@ -595,30 +595,31 @@
       liveBar.id = "liveMembersBar";
       liveBar.innerHTML = `<span id="heart">❤️</span> <span id="liveCount">0</span> lovely guests are with us! <span id="heart">❤️</span>`;
       
-      // Styling the bar
-      liveBar.style.position = "fixed";
-      liveBar.style.top = "10px";
-      liveBar.style.left = "50%";
-      liveBar.style.transform = "translateX(-50%)";
-      liveBar.style.padding = "12px 20px";
-      liveBar.style.background = "rgba(255, 105, 180, 0.8)"; // Soft pink transparent
-      liveBar.style.color = "#fff";
-      liveBar.style.fontSize = "18px";
-      liveBar.style.fontWeight = "bold";
-      liveBar.style.borderRadius = "25px";
-      liveBar.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.2)";
-      liveBar.style.animation = "fadeIn 1s ease-in-out";
-      liveBar.style.zIndex = "1000";
-
+      // Append the live bar to the body
       document.body.prepend(liveBar);
 
-      // CSS Animation
+      // CSS Styles for Responsive & Floating Bar
       let style = document.createElement("style");
       style.innerHTML = `
-        @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(-10px); }
-          to { opacity: 1; transform: translateY(0); }
+        #liveMembersBar {
+          position: fixed;
+          top: 0;
+          left: 50%;
+          transform: translateX(-50%);
+          padding: 10px 20px;
+          background: rgba(255, 105, 180, 0.9); /* Soft pink transparent */
+          color: #fff;
+          font-size: 18px;
+          font-weight: bold;
+          border-radius: 25px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+          text-align: center;
+          white-space: nowrap;
+          z-index: 1000;
+          animation: fadeIn 1s ease-in-out;
         }
+
+        /* Heartbeat Animation */
         @keyframes heartbeat {
           0% { transform: scale(1); }
           50% { transform: scale(1.2); }
@@ -627,6 +628,26 @@
         #heart {
           display: inline-block;
           animation: heartbeat 1s infinite;
+        }
+
+        /* Fade-in Animation */
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(-10px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive Design */
+        @media screen and (max-width: 768px) {
+          #liveMembersBar {
+            font-size: 14px;
+            padding: 8px 15px;
+          }
+        }
+        @media screen and (max-width: 480px) {
+          #liveMembersBar {
+            font-size: 12px;
+            padding: 6px 12px;
+          }
         }
       `;
       document.head.appendChild(style);
