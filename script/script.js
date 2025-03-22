@@ -186,9 +186,10 @@ function disableScroll() {
         e.preventDefault();
         window.scrollTo(0, 0); // Optionally, you can set scroll position to the top of the page
     };
-    
+    viewInvitationButton.style.cursor = 'pointer';
     // Prevent touch events (for mobile devices)
     document.body.style.overflow = 'hidden';
+      
 }
 
 function enableScroll() {
