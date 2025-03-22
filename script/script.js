@@ -172,75 +172,75 @@ document.addEventListener("keydown", function (event) {
 
 
 //Disable scroll----------------------------------------------------------------------------------------------
-const elementRoot = document.querySelector(":root");
-const notification = document.getElementById("notification");
-const notificationMessage = document.getElementById("notificationMessage");
-const viewInvitationButton = document.getElementById("viewInvitationButton");
-const dismissButton = document.getElementById("dismissButton");
+// const elementRoot = document.querySelector(":root");
+// const notification = document.getElementById("notification");
+// const notificationMessage = document.getElementById("notificationMessage");
+// const viewInvitationButton = document.getElementById("viewInvitationButton");
+// const dismissButton = document.getElementById("dismissButton");
 
-let notificationTimeout;
+// let notificationTimeout;
 
-function disableScroll() {
-    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    let scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+// function disableScroll() {
+//     let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+//     let scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
 
-    window.onscroll = function () {
-        window.scrollTo(scrollTop, scrollLeft);
-    };
-}
+//     window.onscroll = function () {
+//         window.scrollTo(scrollTop, scrollLeft);
+//     };
+// }
 
-function enableScroll() {
-    window.onscroll = function () {};
-    elementRoot.style.scrollBehavior = "smooth";
-    localStorage.setItem("opened", "true"); 
-    hideNotification(); // Hide notification
-}
+// function enableScroll() {
+//     window.onscroll = function () {};
+//     elementRoot.style.scrollBehavior = "smooth";
+//     localStorage.setItem("opened", "true"); 
+//     hideNotification(); // Hide notification
+// }
 
-function showNotification(message) {
-    // Only show notification if the invitation hasn't been opened
-    if (!localStorage.getItem("opened")) {
-        notificationMessage.textContent = message; // Set message
-        notification.classList.add("show"); // Add class for animation
+// function showNotification(message) {
+//     // Only show notification if the invitation hasn't been opened
+//     if (!localStorage.getItem("opened")) {
+//         notificationMessage.textContent = message; // Set message
+//         notification.classList.add("show"); // Add class for animation
 
-        // Clear existing timeout if any
-        clearTimeout(notificationTimeout);
+//         // Clear existing timeout if any
+//         clearTimeout(notificationTimeout);
         
-        // Show notification and set a timeout to hide it
-        notification.style.display = "block";
-        notificationTimeout = setTimeout(hideNotification, 3000);
-    }
-}
+//         // Show notification and set a timeout to hide it
+//         notification.style.display = "block";
+//         notificationTimeout = setTimeout(hideNotification, 3000);
+//     }
+// }
 
-function hideNotification() {
-    notification.classList.remove("show"); // Remove class for animation
-    // Delay the actual hiding to allow the fade-out animation to complete
-    setTimeout(() => {
-        notification.style.display = "none"; // Hide notification
-    }, 500); // Match the duration of the opacity transition
-}
+// function hideNotification() {
+//     notification.classList.remove("show"); // Remove class for animation
+//     // Delay the actual hiding to allow the fade-out animation to complete
+//     setTimeout(() => {
+//         notification.style.display = "none"; // Hide notification
+//     }, 500); // Match the duration of the opacity transition
+// }
 
-// Dismiss button functionality
-dismissButton.addEventListener("click", hideNotification);
+// // Dismiss button functionality
+// dismissButton.addEventListener("click", hideNotification);
 
-// Initial check for localStorage
-if (!localStorage.getItem("opened")) {
-    disableScroll();
-}
+// // Initial check for localStorage
+// if (!localStorage.getItem("opened")) {
+//     disableScroll();
+// }
 
-// Add click event to the button
-viewInvitationButton.addEventListener("click", enableScroll);
+// // Add click event to the button
+// viewInvitationButton.addEventListener("click", enableScroll);
 
-// Notify users if they click anywhere else or try to scroll
-document.addEventListener("click", function(event) {
-    if (event.target !== viewInvitationButton) {
-        showNotification("Please click the 'View Invitation' "); // Show notification
-    }
-});
+// // Notify users if they click anywhere else or try to scroll
+// document.addEventListener("click", function(event) {
+//     if (event.target !== viewInvitationButton) {
+//         showNotification("Please click the 'View Invitation' "); // Show notification
+//     }
+// });
 
-// Show notification on scroll attempt
-document.addEventListener("scroll", function() {
-    showNotification("Please click the 'View Invitation'"); // Show notification
-});
+// // Show notification on scroll attempt
+// document.addEventListener("scroll", function() {
+//     showNotification("Please click the 'View Invitation'"); // Show notification
+// });
 
 //Disable scroll End
 //Attendance Form---------------------------------------------------------------------------------------------------
