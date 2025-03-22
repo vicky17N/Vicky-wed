@@ -180,16 +180,19 @@ const dismissButton = document.getElementById("dismissButton");
 
 let notificationTimeout;
 
+// Disable scrolling
 function disableScroll() {
     // Prevent scrolling
     window.onscroll = function (e) {
         e.preventDefault();
         window.scrollTo(0, 0); // Optionally, you can set scroll position to the top of the page
     };
-    viewInvitationButton.style.cursor = 'pointer';
+
     // Prevent touch events (for mobile devices)
     document.body.style.overflow = 'hidden';
-      
+
+    // Enable pointer cursor on the "View Invitation" button
+    viewInvitationButton.style.cursor = 'pointer'; // Cursor will be the hand icon when hovering the button
 }
 
 function enableScroll() {
@@ -197,7 +200,12 @@ function enableScroll() {
     elementRoot.style.scrollBehavior = "smooth";
     localStorage.setItem("opened", "true"); 
     hideNotification(); // Hide notification
+    document.body.style.overflow = 'auto'; // Ensure scrolling is allowed again
+
+    // Reset cursor behavior when scrolling is enabled
+    viewInvitationButton.style.cursor = ''; // Remove pointer cursor style
 }
+
 
 function showNotification(message) {
     // Only show notification if the invitation hasn't been opened
