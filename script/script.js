@@ -181,12 +181,14 @@ const dismissButton = document.getElementById("dismissButton");
 let notificationTimeout;
 
 function disableScroll() {
-    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    let scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
-
-    window.onscroll = function () {
-        window.scrollTo(scrollTop, scrollLeft);
+    // Prevent scrolling
+    window.onscroll = function (e) {
+        e.preventDefault();
+        window.scrollTo(0, 0); // Optionally, you can set scroll position to the top of the page
     };
+    
+    // Prevent touch events (for mobile devices)
+    document.body.style.overflow = 'hidden';
 }
 
 function enableScroll() {
