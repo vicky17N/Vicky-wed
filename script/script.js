@@ -182,11 +182,7 @@ let notificationTimeout;
 
 // Disable scrolling
 function disableScroll() {
-    // Prevent scrolling
-    window.onscroll = function (e) {
-        e.preventDefault();
-       // Optionally, you can set scroll position to the top of the page
-    };
+
     // Enable pointer cursor on the "View Invitation" button
     viewInvitationButton.style.cursor = 'pointer'; // Cursor will be the hand icon when hovering the button
 }
