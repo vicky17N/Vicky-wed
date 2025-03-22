@@ -185,12 +185,8 @@ function disableScroll() {
     // Prevent scrolling
     window.onscroll = function (e) {
         e.preventDefault();
-        window.scrollTo(0, 0); // Optionally, you can set scroll position to the top of the page
+       // Optionally, you can set scroll position to the top of the page
     };
-
-    // Prevent touch events (for mobile devices)
-    document.body.style.overflow = 'hidden';
-
     // Enable pointer cursor on the "View Invitation" button
     viewInvitationButton.style.cursor = 'pointer'; // Cursor will be the hand icon when hovering the button
 }
