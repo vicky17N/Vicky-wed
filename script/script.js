@@ -171,6 +171,7 @@ document.addEventListener("keydown", function (event) {
 //simplyCountdown end ---------------------------------------------------------------------------------------
 
 
+//Disable scroll----------------------------------------------------------------------------------------------
 const elementRoot = document.querySelector(":root");
 const notification = document.getElementById("notification");
 const notificationMessage = document.getElementById("notificationMessage");
@@ -179,18 +180,13 @@ const dismissButton = document.getElementById("dismissButton");
 
 let notificationTimeout;
 
-// Function to detect if it's a mobile device
-function isMobileDevice() {
-    return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-}
-
-// Disable scrolling
 function disableScroll() {
+    // Prevent scrolling
     window.onscroll = function (e) {
         e.preventDefault();
         window.scrollTo(0, 0); // Optionally, you can set scroll position to the top of the page
     };
-
+    
     // Prevent touch events (for mobile devices)
     document.body.style.overflow = 'hidden';
 }
@@ -200,10 +196,10 @@ function enableScroll() {
     elementRoot.style.scrollBehavior = "smooth";
     localStorage.setItem("opened", "true"); 
     hideNotification(); // Hide notification
-    document.body.style.overflow = 'auto'; // Ensure scrolling is allowed again
 }
 
 function showNotification(message) {
+    // Only show notification if the invitation hasn't been opened
     if (!localStorage.getItem("opened")) {
         notificationMessage.textContent = message; // Set message
         notification.classList.add("show"); // Add class for animation
@@ -234,10 +230,7 @@ if (!localStorage.getItem("opened")) {
 }
 
 // Add click event to the button
-viewInvitationButton.addEventListener("click", function() {
-    enableScroll(); // Enable scrolling when the button is clicked
-
-});
+viewInvitationButton.addEventListener("click", enableScroll);
 
 // Notify users if they click anywhere else or try to scroll
 document.addEventListener("click", function(event) {
@@ -250,6 +243,8 @@ document.addEventListener("click", function(event) {
 document.addEventListener("scroll", function() {
     showNotification("Please click the 'View Invitation'"); // Show notification
 });
+
+// 
 //Disable scroll
 
 //Attendance Form---------------------------------------------------------------------------------------------------
