@@ -170,7 +170,8 @@ document.addEventListener("keydown", function (event) {
       });
 //simplyCountdown end ---------------------------------------------------------------------------------------
 
-//Disable scroll----------------------------------------------------------------------------------------------
+
+//Disable scroll
 const elementRoot = document.querySelector(":root");
 const notification = document.getElementById("notification");
 const notificationMessage = document.getElementById("notificationMessage");
@@ -180,18 +181,15 @@ const dismissButton = document.getElementById("dismissButton");
 let notificationTimeout;
 
 function disableScroll() {
-    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    let scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
-
-    window.onscroll = function () {
-        window.scrollTo(scrollTop, scrollLeft);
-    };
+    // Disable scrolling on the body element
+    document.body.style.overflow = "hidden";
 }
 
 function enableScroll() {
-    window.onscroll = function () {};
+    // Enable scrolling on the body element
+    document.body.style.overflow = "auto";
     elementRoot.style.scrollBehavior = "smooth";
-    localStorage.setItem("opened", "true"); 
+    localStorage.setItem("opened", "true");
     hideNotification(); // Hide notification
 }
 
