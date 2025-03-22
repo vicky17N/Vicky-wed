@@ -180,14 +180,14 @@ const dismissButton = document.getElementById("dismissButton");
 
 let notificationTimeout;
 
-// function disableScroll() {
-//     let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-//     let scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+function disableScroll() {
+    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    let scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
 
-//     window.onscroll = function () {
-//         window.scrollTo(scrollTop, scrollLeft);
-//     };
-// }
+    window.onscroll = function () {
+        window.scrollTo(scrollTop, scrollLeft);
+    };
+}
 
 function enableScroll() {
     window.onscroll = function () {};
