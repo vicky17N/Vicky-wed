@@ -236,11 +236,7 @@ if (!localStorage.getItem("opened")) {
 // Add click event to the button
 viewInvitationButton.addEventListener("click", function() {
     enableScroll(); // Enable scrolling when the button is clicked
-    
-    // If it's a mobile device, disable scrolling until button is clicked
-    if (isMobileDevice()) {
-        disableScroll(); // This ensures scrolling is disabled on mobile before clicking the button
-    }
+
 });
 
 // Notify users if they click anywhere else or try to scroll
