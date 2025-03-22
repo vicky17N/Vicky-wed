@@ -171,7 +171,7 @@ document.addEventListener("keydown", function (event) {
 //simplyCountdown end ---------------------------------------------------------------------------------------
 
 
-//Disable scroll
+//Disable scroll----------------------------------------------------------------------------------------------
 const elementRoot = document.querySelector(":root");
 const notification = document.getElementById("notification");
 const notificationMessage = document.getElementById("notificationMessage");
@@ -181,15 +181,18 @@ const dismissButton = document.getElementById("dismissButton");
 let notificationTimeout;
 
 function disableScroll() {
-    // Disable scrolling on the body element
-    document.body.style.overflow = "hidden";
+    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    let scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+
+    window.onscroll = function () {
+        window.scrollTo(scrollTop, scrollLeft);
+    };
 }
 
 function enableScroll() {
-    // Enable scrolling on the body element
-    document.body.style.overflow = "auto";
+    window.onscroll = function () {};
     elementRoot.style.scrollBehavior = "smooth";
-    localStorage.setItem("opened", "true");
+    localStorage.setItem("opened", "true"); 
     hideNotification(); // Hide notification
 }
 
@@ -239,8 +242,7 @@ document.addEventListener("scroll", function() {
     showNotification("Please click the 'View Invitation'"); // Show notification
 });
 
-//Disable scroll End-----------------------------------------------------------------------------------------------
-
+//Disable scroll End
 //Attendance Form---------------------------------------------------------------------------------------------------
       window.addEventListener("load", function () {
         const form = document.getElementById("my-form");
